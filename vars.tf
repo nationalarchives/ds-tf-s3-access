@@ -3,4 +3,4 @@ variable "environment" {}
 variable "owner" {}
 variable "created_by" {}
 
-variable "roles_and_policies" {}
+variable "role_and_policy" {}
