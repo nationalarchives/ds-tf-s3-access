@@ -2,7 +2,7 @@ resource "aws_iam_policy" "read_policy" {
   name = "${var.bucket_name}-read"
   description = "Read-only access to ${var.bucket_name}"
   policy = <<EOF
-    {
+{
   "Version": "2012-10-17",
   "Statement": [
     {
@@ -33,7 +33,7 @@ resource "aws_iam_policy" "write_policy" {
   name = "${var.bucket_name}-write"
   description = "Read-Write access to ${var.bucket_name}"
   policy = <<EOF
-    {
+{
   "Version": "2012-10-17",
   "Statement": [
     {
