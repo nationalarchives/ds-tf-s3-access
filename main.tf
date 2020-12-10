@@ -1,10 +1,61 @@
-resource "aws_iam_role_policy" "role_policy" {
-  name = var.role_and_policy.role_name
-  role = aws_iam_role.role.id
-  policy = var.role_and_policy.role_policy
+resource "aws_iam_policy" "read_policy" {
+  name = "${var.bucket_name}-read"
+  description = "Read-only access to ${var.bucket_name}"
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetBucketLocation",
+        "s3:ListBucket"
+      ],
+     "Resource": [
+        "arn:aws:s3:::${var.bucket_name}"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject"
+      ],
+      "Resource": [
+         "arn:aws:s3:::${var.bucket_name}/*"
+      ]
+    }
+  ]
+}
+EOF
 }
 
-resource "aws_iam_role" "role" {
-  name = var.role_and_policy.role_name
-  assume_role_policy = var.role_and_policy.assume_role_policy
+resource "aws_iam_policy" "write_policy" {
+  name = "${var.bucket_name}-write"
+  description = "Read-Write access to ${var.bucket_name}"
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetBucketLocation",
+        "s3:ListBucket"
+      ],
+     "Resource": [
+        "arn:aws:s3:::${var.bucket_name}"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject"
+      ],
+      "Resource": [
+         "arn:aws:s3:::${var.bucket_name}/*"
+      ]
+    }
+  ]
+}
+EOF
 }
